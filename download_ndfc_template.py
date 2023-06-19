@@ -31,7 +31,8 @@ response = requests.request(
     verify=ssl_verify
 )
 for item in response.json():
-    template_list.append({"name": item["name"], "filename": item["fileName"]})
+    if item['contentType'] == 'TEMPLATE_CLI':    # TEMPLATE_CLI download only
+        template_list.append({"name": item["name"], "filename": item["fileName"]})
 
 ## Download NDFC Templates
 for item in template_list:
